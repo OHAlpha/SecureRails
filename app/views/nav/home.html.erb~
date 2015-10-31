@@ -1,0 +1,54 @@
+<p>Hash values</p>
+<script>
+function toHex(s) {
+  var hex='';
+  for(var i=0;i<s.length;i++)
+    hex += s.charCodeAt(i).toString(16);
+  return hex;
+}
+
+$(document).ready(function() {
+  $(".hash").each(function(index, element) {
+    var md = forge.md.sha512.create();
+    md.update($(this).attr('text'));
+    $("#hash-"+index+"-sha512").text("local: "+md.digest().toHex());
+    var hmac = forge.hmac.create();
+    hmac.start('sha512', $(this).attr('hmac_key'));
+    hmac.update($(this).attr('text'));
+    $("#hash-"+index+"-hmac").text("local: "+hmac.digest().toHex());
+    var key = forge.pkcs5.pbkdf2($(this).attr('text'), $(this).attr('pbkdf2_salt'), 200, 64, forge.md.sha512.create());
+    $("#hash-"+index+"-pbkdf2").text("local: "+toHex(key));
+  });
+});
+</script>
+<ul>
+<% index = 0 %>
+<% @text.each do |string| %>
+  <li class="hash" id="hash-<%= index %>" text="<%= string[:string] %>" hmac_key="<%= string[:hmac_key] %>" pbkdf2_salt="<%= string[:pbkdf2_salt] %>">text: <%= string[:string] %></li>
+  <ul>
+    <li id="hash-<%= index %>-hmac-key">hmac_key: <%= string[:hmac_key] %></li>
+    <li id="hash-<%= index %>-pbkdf2-salt">pbkdf2_salt: <%= string[:pbkdf2_salt] %></li>
+  </ul>
+  <ul>
+    <!--li>md5: <%= string[:md5] %></li>
+    <li>sha256: <%= string[:sha256] %></li>
+    <li>sha384: <%= string[:sha384] %></li-->
+    <li>sha512:</li>
+      <ul>
+        <li>server: <%= string[:sha512] %></li>
+        <li id="hash-<%= index %>-sha512"></li>
+      </ul>
+    <li>hmac:</li>
+      <ul>
+        <li>server: <%= string[:hmac] %></li>
+        <li id="hash-<%= index %>-hmac"></li>
+      </ul>
+    <li>pbkdf2:</li>
+      <ul>
+        <li>server: <%= string[:pbkdf2] %></li>
+        <li id="hash-<%= index %>-pbkdf2"></li>
+      </ul>
+  </ul>
+  <% index = index + 1 %>
+<% end %>
+</ul>

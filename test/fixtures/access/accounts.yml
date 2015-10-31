@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  account_name: MyString
+  account_salt: MyString
+  account_passhash: MyString
+
+two:
+  account_name: MyString
+  account_salt: MyString
+  account_passhash: MyString
