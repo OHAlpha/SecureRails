@@ -1,10 +1,24 @@
 <h1>Access#login</h1>
 <p>Find me in app/views/access/login.html.erb</p>
 
-<%= form_tag( enter_path() ) do %>
+<script>
+$(document).ready(function() {
+  $("#login_form").submit(function(event) {
+    pass = $("#pass").attr('value');
+    salt = $("#salt").attr('value');
+    iterations = $("#iterations").attr('value');
+    var hash = forge.pkcs5.pbkdf2(pass, @salt, @iterations, 64, forge.md.sha512.create());
+    $("#hash").attr('value', toHex(hash));
+    $("#pass").attr('value', '');
+  });
+});
+</script>
+
+<%= form_tag( enter_path(), id: 'login_form' ) do %>
   <%= label_tag( :unom, 'Username' ) %>
-  <%= text_field_tag( :unom ) %>
+  <%= text_field_tag( :unom ) %><br/>
   <%= label_tag( :pass, 'Username' ) %>
   <%= password_field_tag( :pass ) %>
+  <%= hidden_field_tag( :hash, value: '' ) %>
   <%= submit_tag( 'Login' ) %>
 <% end %>

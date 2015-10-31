@@ -7,7 +7,7 @@
 }
 <% end %>
 
-<% content_for :script do %>
+<script>
 function beforesub(form) {
   var pass = form['pass'];
   var hash = form['hash'];
@@ -23,7 +23,7 @@ function toHex(s) {
   }
   return hex;
 }
-<% end %>
+</script>
 
 <%= form_tag( verify_login_path(), id: 'loginform', onsubmit: 'return beforesub(this);' ) do %>
   <%= label_tag( :pass, 'Password' ) %>

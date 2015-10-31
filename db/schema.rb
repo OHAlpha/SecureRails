@@ -15,10 +15,12 @@ ActiveRecord::Schema.define(version: 20151030164536) do
 
   create_table "access_accounts", force: :cascade do |t|
     t.string   "account_name"
-    t.string   "account_salt"
+    t.string   "account_salta"
+    t.string   "account_saltb"
+    t.integer  "account_iterations"
     t.string   "account_passhash"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
 end

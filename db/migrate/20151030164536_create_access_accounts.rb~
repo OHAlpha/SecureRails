@@ -4,7 +4,7 @@ class CreateAccessAccounts < ActiveRecord::Migration
       t.string :account_name
       t.string :account_salta
       t.string :account_saltb
-      t.integer :account_iterations
+      t.integer :iterations
       t.string :account_passhash
 
       t.timestamps null: false

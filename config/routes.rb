@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   get 'access/login', as: :login
   post 'access/enter', as: :enter
+  post 'access/verify_login', as: :verify_login
   get 'access/request', as: :request
   post 'access/authorize', as: :authorize
   get 'access/logout', as: :logout

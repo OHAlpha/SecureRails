@@ -5,10 +5,18 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <script type="text/javascript">
+<%= yield :script if content_for :script %>
+  </script>
+  <style>
+<%= yield :style if content_for :script %>
+  </style>
 </head>
 <body>
 
 <%= yield %>
+
+<%= debug(params) %>
 
 </body>
 </html>

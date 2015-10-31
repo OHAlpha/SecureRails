@@ -7,7 +7,7 @@ class AccessController < ApplicationController
   def enter
     @user = Access::Account.where(account_name: params[:unom]).first
     if @user.nil?
-      flash[:msg] = 'user does not exist'
+      flash = 'user does not exist'
       redirect_to :login
     else
       @id = @user.id
@@ -21,10 +21,9 @@ class AccessController < ApplicationController
     salt = @user.account_saltb
     passhash = OpenSSL::HMAC.hexdigest OpenSSL::Digest.new( 'sha512' ), 'HMAC_KEY', params[:hash] + salt
     if passhash == @user.account_passhash
-      flash[:msg] = params[:pass]
       redirect_to root_path
     else
-      flash[:msg] = 'password or username was incorrect'
+      flash = 'password or username was incorrect'
       redirect_to :login
     end
   end

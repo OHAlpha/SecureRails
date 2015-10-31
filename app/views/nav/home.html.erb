@@ -16,7 +16,7 @@ $(document).ready(function() {
     hmac.start('sha512', $(this).attr('hmac_key'));
     hmac.update($(this).attr('text'));
     $("#hash-"+index+"-hmac").text("local: "+hmac.digest().toHex());
-    var key = forge.pkcs5.pbkdf2($(this).attr('text'), $(this).attr('pbkdf2_salt'), 64000, 64, forge.md.sha512.create());
+    var key = forge.pkcs5.pbkdf2($(this).attr('text'), $(this).attr('pbkdf2_salt'), 10000, 64, forge.md.sha512.create());
     $("#hash-"+index+"-pbkdf2").text("local: "+toHex(key));
   });
 });
