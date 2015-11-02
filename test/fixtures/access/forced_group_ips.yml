@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  group_id: 1
+  ip_low: 1
+  ip_high: 1
+  notes: MyText
+
+two:
+  group_id: 1
+  ip_low: 1
+  ip_high: 1
+  notes: MyText

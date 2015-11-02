@@ -1,8 +1,28 @@
 <h1>Access#login</h1>
 <p>Find me in app/views/access/login.html.erb</p>
 
-<%= form_tag( enter_path() ) do %>
-  <%= label_tag( :unom, 'Username' ) %>
-  <%= text_field_tag( :unom ) %><br/>
+<% content_for :script do %>
+function beforesub(form) {
+  var pass = form['pass'];
+  var hash = form['hash'];
+  var tmp = forge.pkcs5.pbkdf2(pass.value, '<%= @salt %>', '<%= @iterations %>', 64, forge.md.sha512.create());
+  hash.value =  toHex(tmp);
+  pass.value;
+  return true;
+}
+function toHex(s) {
+  var hex='';
+  for (var i = 0; i < s.length; i++) {
+    hex += s.charCodeAt(i).toString(16);
+  }
+  return hex;
+}
+<% end %>
+
+<%= form_tag( verify_login_path(), id: 'loginform', onsubmit: 'return beforesub(this);' ) do %>
+  <%= label_tag( :pass, 'Password' ) %>
+  <%= password_field_tag( :pass, '' ) %>
+  <%= hidden_field_tag( :id, @id.to_s ) %>
+  <%= hidden_field_tag( :hash, '' ) %>
   <%= submit_tag( 'Login' ) %>
 <% end %>

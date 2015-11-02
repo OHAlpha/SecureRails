@@ -1,0 +1,2 @@
+class Access::LoginAttempt < ActiveRecord::Base
+end

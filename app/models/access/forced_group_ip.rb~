@@ -1,0 +1,2 @@
+class Access::ForcedGroupIp < ActiveRecord::Base
+end

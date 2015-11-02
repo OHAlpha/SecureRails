@@ -1,40 +1,34 @@
-require 'openssl'
-
 class AccessController < ApplicationController
+  def register
+  end
+
+  def after_register
+  end
+
   def login
   end
 
-  def enter
-    @user = Access::Account.where(account_name: params[:unom]).first
-    if @user.nil?
-      flash[:msg] = 'user does not exist'
-      redirect_to :login
-    else
-      @id = @user.id
-      @salt = @user.account_salta
-      @iterations = @user.account_iterations
-    end
-  end
-  
-  def verify_login
-    @user = Access::Account.find(params[:id])
-    salt = @user.account_saltb
-    passhash = OpenSSL::HMAC.hexdigest OpenSSL::Digest.new( 'sha512' ), 'HMAC_KEY', params[:hash] + salt
-    if passhash == @user.account_passhash
-      flash[:msg] = params[:pass]
-      redirect_to root_path
-    else
-      flash[:msg] = 'password or username was incorrect'
-      redirect_to :login
-    end
-  end
-
-  def authorize
+  def after_login
   end
 
   def logout
   end
 
-  def exit
+  def after_logout
+  end
+
+  def cancel
+  end
+
+  def after_cancel
+  end
+
+  def check_username
+  end
+
+  def check_email
+  end
+
+  def check_passhash
   end
 end

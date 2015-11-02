@@ -1,0 +1,2 @@
+class Access::Login < ActiveRecord::Base
+end

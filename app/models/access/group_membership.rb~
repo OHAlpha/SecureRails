@@ -1,0 +1,2 @@
+class Access::GroupMembership < ActiveRecord::Base
+end
