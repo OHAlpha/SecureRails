@@ -1,0 +1,9 @@
+<% if @success %>
+
+window.location.href = <%= after_login_path %>
+
+<% else %>
+
+$('#bottom-message').text('Invalid password. '+'<%= @msg %>');
+
+<% end %>

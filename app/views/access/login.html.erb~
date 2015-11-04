@@ -1,2 +1,18 @@
 <h1>Access#login</h1>
 <p>Find me in app/views/access/login.html.erb</p>
+
+<% content_for :script do %>
+function clearBMessage(data) {
+  $('#bottom-message').text('');
+  return true;
+}
+<% end %>
+
+<%= form_tag( post_login_path, remote: true, id: 'loginform', onsubmit: 'return clearBMessage(this);' ) do %>
+  <p id="top-message">Enter your username or email address:</p>
+  <%= text_field_tag( :public, '' ) %>
+  <%= hidden_field_tag( :secret, '' ) %>
+  <%= hidden_field_tag( :id, '' ) %>
+  <%= submit_tag( 'Next', id: 'submit' ) %>
+  <p id="bottom-message"></p>
+<% end %>

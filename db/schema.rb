@@ -29,8 +29,8 @@ ActiveRecord::Schema.define(version: 20151101124552) do
     t.datetime "updated_at",                  null: false
   end
 
-  add_index "access_accounts", ["account_name"], name: "access_account_name_unique", unique: true
-  add_index "access_accounts", ["primary_email"], name: "access_account_email_unique", unique: true
+  add_index "access_accounts", ["account_name"], name: "index_access_accounts_on_account_name", unique: true
+  add_index "access_accounts", ["primary_email"], name: "index_access_accounts_on_primary_email", unique: true
 
   create_table "access_auto_logins", force: :cascade do |t|
     t.integer  "user_id",     null: false
@@ -40,10 +40,9 @@ ActiveRecord::Schema.define(version: 20151101124552) do
     t.datetime "updated_at",  null: false
   end
 
-  add_index "access_auto_logins", ["private_key"], name: "access_autologin_private_index"
-  add_index "access_auto_logins", ["public_key"], name: "access_autologin_public_index"
-  add_index "access_auto_logins", ["user_id", "public_key"], name: "access_autologin_unique", unique: true
-  add_index "access_auto_logins", ["user_id"], name: "access_autologin_to_user"
+  add_index "access_auto_logins", ["private_key"], name: "index_access_auto_logins_on_private_key"
+  add_index "access_auto_logins", ["public_key"], name: "index_access_auto_logins_on_public_key"
+  add_index "access_auto_logins", ["user_id", "public_key"], name: "index_access_auto_logins_on_user_id_and_public_key", unique: true
 
   create_table "access_banned_emails", force: :cascade do |t|
     t.string   "regex",      null: false
@@ -68,9 +67,7 @@ ActiveRecord::Schema.define(version: 20151101124552) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "access_group_memberships", ["group_id"], name: "access_group_member_to_group"
-  add_index "access_group_memberships", ["user_id", "group_id"], name: "access_group_member_unique", unique: true
-  add_index "access_group_memberships", ["user_id"], name: "access_group_member_to_user"
+  add_index "access_group_memberships", ["user_id", "group_id"], name: "index_access_group_memberships_on_user_id_and_group_id", unique: true
 
   create_table "access_groups", force: :cascade do |t|
     t.string   "group_name",  null: false
@@ -79,7 +76,7 @@ ActiveRecord::Schema.define(version: 20151101124552) do
     t.datetime "updated_at",  null: false
   end
 
-  add_index "access_groups", ["group_name"], name: "access_group_name_unique", unique: true
+  add_index "access_groups", ["group_name"], name: "index_access_groups_on_group_name", unique: true
 
   create_table "access_login_attempts", force: :cascade do |t|
     t.string   "username",   null: false
@@ -97,8 +94,5 @@ ActiveRecord::Schema.define(version: 20151101124552) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
-
-  add_index "access_logins", ["auto_login_id"], name: "access_login_to_autologin"
-  add_index "access_logins", ["user_id"], name: "access_login_to_user"
 
 end

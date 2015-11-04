@@ -1,0 +1,32 @@
+<% if @exists %>
+
+$('#public').attr('value', '');
+$('#top-message').text('Welcome <%= @user.account_name %>. Enter your password');
+$('#loginform').attr('onsubmit', 'return beforesub(this);');
+$('#loginform').attr('action', '<%= check_passhash_path %>');
+$('#public').attr('type', 'password');
+$('#submit').attr('value', 'Login');
+
+function beforesub(form) {
+  $('#bottom-message').text('');
+  var pass = form['public'];
+  var hash = form['secret'];
+  var tmp = forge.pkcs5.pbkdf2(pass.value, '<%= @user.salta %>', '<%= @user.iterations %>', 64, forge.md.sha512.create());
+  hash.value = toHex(tmp);
+  pass.value = '';
+  return true;
+}
+
+function toHex(s) {
+  var hex='';
+  for (var i = 0; i < s.length; i++) {
+    hex += s.charCodeAt(i).toString(16);
+  }
+  return hex;
+}
+
+<% else %>
+
+$('#bottom-message').text('There is no user with that email address!');
+
+<% end %>

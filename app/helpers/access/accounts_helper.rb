@@ -1,0 +1,2 @@
+module Access::AccountsHelper
+end

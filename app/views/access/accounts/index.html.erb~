@@ -1,0 +1,23 @@
+<h1>Access::Accounts#index</h1>
+<p>Find me in app/views/access/accounts/index.html.erb</p>
+
+<ul>
+<% @accounts.each do |account| %>
+  <li>id: <%= accoun<li>id %></li>
+  <ul>
+    <li>account name: <%= accoun<li>account_name %></li>
+    <li>primary email: <%= accoun<li>primary_email %></li>
+    <li>salta: <%= accoun<li>primary_email %></li>
+    <li>saltb: <%= accoun<li>primary_email %></li>
+    <li>iterations: <%= accoun<li>primary_email %></li>
+    <li>passhash: <%= accoun<li>primary_email %></li>
+    <li>permissions_override_add: <%= accoun<li>primary_email %></li>
+    <li>permissions_override_remove: <%= accoun<li>primary_email %></li>
+    <li>registered_ip: <%= accoun<li>primary_email %></li>
+    <li>registered_user_agent: <%= accoun<li>primary_email %></li>
+    <li>must_validate: <%= accoun<li>primary_email %></li>
+    <li>created_at: <%= accoun<li>primary_email %></li>
+    <li>updated_at: <%= accoun<li>primary_email %></li>
+  </ul>
+<% end %>
+</ul>
