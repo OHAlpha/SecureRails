@@ -5,18 +5,25 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
-  <script type="text/javascript">
-<%= yield :script if content_for :script %>
-  </script>
   <style>
 <%= yield :style if content_for :script %>
   </style>
+  <script type="text/javascript">
+<%= yield :script if content_for :script %>
+  </script>
 </head>
 <body>
+
+<p class="flash"><%= flash[:msg] if not flash[:msg].nil? %></p>
 
 <%= yield %>
 
 <%= debug(params) %>
+<ul>
+  <li>REMOTE_ADDR: <%= request.env['REMOTE_ADDR'] %></li>
+  <li>HTTP_USER_AGENT: <%= request.env['HTTP_USER_AGENT'] %></li>
+</ul>
+<%= debug(request) %>
 
 </body>
 </html>

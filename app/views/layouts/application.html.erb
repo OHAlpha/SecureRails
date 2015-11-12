@@ -19,6 +19,11 @@
 <%= yield %>
 
 <%= debug(params) %>
+<!--ul>
+  <li>REMOTE_ADDR: <%= request.env['REMOTE_ADDR'] %></li>
+  <li>HTTP_USER_AGENT: <%= request.env['HTTP_USER_AGENT'] %></li>
+</ul>
+<-%= debug(request) %-->
 
 </body>
 </html>

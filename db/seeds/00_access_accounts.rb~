@@ -13,7 +13,7 @@ def createAccount(name,pass,email)
   t4 = sb
   ph = OpenSSL::HMAC.hexdigest( @sha, Access::Account.hmac_key, hash + t4 )
   Access::Account.create(account_name: name, primary_email: email, salta: sa, saltb: sb, iterations: is, passhash: ph, permissions_override_add: 0, permissions_override_remove: 0, registered_ip: "0x78000001".to_i, registered_user_agent: '', must_validate: 1)
-  =begin
+=begin
   Access::Account.create do |a|
     a.account_name = name,
     a.primary_email = email
@@ -27,7 +27,7 @@ def createAccount(name,pass,email)
     a.registered_user_agent = '',
     a.must_validate = 1
   end
-  =end
+=end
 end
 
 createAccount 'oalpha', 'password', 'lnugentgibson@gmail.com'

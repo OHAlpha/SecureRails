@@ -4,14 +4,10 @@ require 'openssl'
 
 def createAccount(name,pass,email)
   sa = SecureRandom.hex(16)
-  t1 = sa
   is = 8000 + SecureRandom.random_number( 4001 )
-  t2 = is
-  t3 = pass
-  hash = OpenSSL::PKCS5.pbkdf2_hmac( t3, t1, t2, 64, @sha).each_byte.map { |b| b.to_s(16) }.join
+  hash = OpenSSL::PKCS5.pbkdf2_hmac( pass, sa, is, 64, @sha).each_byte.map { |b| b.to_s(16) }.join
   sb = SecureRandom.hex(32)
-  t4 = sb
-  ph = OpenSSL::HMAC.hexdigest( @sha, Access::Account.hmac_key, hash + t4 )
+  ph = OpenSSL::HMAC.hexdigest( @sha, Access::Account.hmac_key, hash + sb )
   Access::Account.create(account_name: name, primary_email: email, salta: sa, saltb: sb, iterations: is, passhash: ph, permissions_override_add: 0, permissions_override_remove: 0, registered_ip: "0x78000001".to_i, registered_user_agent: '', must_validate: 1)
 =begin
   Access::Account.create do |a|

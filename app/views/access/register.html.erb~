@@ -52,8 +52,6 @@ function validatePassword(p1,p2) {
   <%= label_for( :confirm ) %>
   <%= password_field_tag( :confirm, '' ) %><br/>
   <%= hidden_field_tag( :passhash, '' ) %>
-  <%= hidden_field_tag( :salt, '<%= @salt %>' ) %>
-  <%= hidden_field_tag( :iterations, '<%= @iterations %>' ) %>
   <%= submit_tag( 'Register', id: 'submit' ) %>
   <p id="bottom-message"></p>
 <% end %>

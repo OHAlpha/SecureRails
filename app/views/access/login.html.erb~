@@ -16,3 +16,5 @@ function clearBMessage(data) {
   <%= submit_tag( 'Next', id: 'submit' ) %>
   <p id="bottom-message"></p>
 <% end %>
+
+<p id="salta"></p>
